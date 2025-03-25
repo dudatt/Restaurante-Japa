@@ -13,7 +13,7 @@ public class Pedido {
         this.pedidos.add(item);
     }
 
-    public float calcularTotal() {
+    public float calcularValorTotalPedido() {
         float total = 0;
         for (Cardapio item : pedidos) {
             total += item.preco;
@@ -22,14 +22,18 @@ public class Pedido {
     }
 
     public float calcularTaxaServico() {
-        return calcularTotal() * 0.10f; // 10% de taxa de serviço
+        return calcularValorTotalPedido() * 0.10f;
+    }
+
+    public float calcularValorFinal() {
+        float totalFinal = calcularValorTotalPedido() + calcularTaxaServico();
+        return totalFinal;
     }
 
     @Override
     public String toString() {
-        float total = calcularTotal();
+        float total = calcularValorTotalPedido();
         float taxaServico = calcularTaxaServico();
-        float totalFinal = total + taxaServico;
 
         String resumo = "Pedido de " + cliente + ":\n";
         for (Cardapio item : pedidos) {
@@ -37,7 +41,7 @@ public class Pedido {
         }
         resumo += "Subtotal: R$ " + String.format("%.2f", total) + "\n";
         resumo += "Taxa de serviço (10%): R$ " + String.format("%.2f", taxaServico) + "\n";
-        resumo += "Total final: R$ " + String.format("%.2f", totalFinal);
+        resumo += "Total final: R$ " + String.format("%.2f", calcularValorFinal()) + "\n";
 
         return resumo;
     }

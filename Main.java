@@ -47,13 +47,13 @@ public class Main {
             System.out.println("Digite o valor que deseja pagar: ");
             float valorPago = teclado.nextFloat();
 
-            if (valorPago < pedido.calcularTotal()) {
+            if (valorPago < pedido.calcularValorFinal()) {
                 System.out.println("Valor insuficiente. Pedido cancelado.");
             } else {
-                float troco = valorPago - pedido.calcularTotal();
+                float troco = valorPago - pedido.calcularValorFinal();
                 System.out.println("Troco: R$ " + String.format("%.2f", troco));
             }
-
+            
         }
         System.out.println("Obrigado e volte sempre! :D");
         teclado.close();
